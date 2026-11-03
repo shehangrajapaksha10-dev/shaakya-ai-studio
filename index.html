@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="si">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#101522">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Shaakya Studio">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <title>Shaakya AI Studio — Free Edition</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">✦</div>
+    <div><div class="brand">SHAakya <span>AI STUDIO</span></div><div class="edition">FREE EDITION · STORY TO FILM WORKSPACE</div></div>
+    <div class="free-pill">FREE</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">YOUR STORY. YOUR MOVIE.</div>
+      <h1>කතාවක් දෙන්න.<br><em>සිනමාවක්</em> සැලසුම් කරමු.</h1>
+      <p>සිංහල කතාව කොටස්වලට බෙදාගෙන, narration අහලා, ඔබේ video clips එකතු කරගන්න.</p>
+      <div class="hero-tags"><span>🎬 Scene planner</span><span>🎙 Sinhala voice</span><span>📱 iPhone friendly</span></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><div><div class="step">STEP 01</div><h2>ඔබේ කතාව</h2></div><span class="section-icon">✍️</span></div>
+      <label for="storyTitle">චිත්‍රපටයේ නම</label>
+      <input id="storyTitle" type="text" placeholder="උදා: ශාක්‍ය දිසානායකගේ පළමු මෙහෙයුම">
+      <label for="storyText">සම්පූර්ණ කතාව / script එක</label>
+      <textarea id="storyText" rows="9" placeholder="ඔබේ සිංහල කතාව මෙතැනට paste කරන්න..."></textarea>
+      <div class="row-actions">
+        <button id="sampleBtn" class="btn ghost">උදාහරණයක් දාන්න</button>
+        <button id="makeScenesBtn" class="btn primary">✦ Scene හදන්න</button>
+      </div>
+      <p class="hint">මෙම Free prototype එක කතාව ඔබගේ browser එක තුළම සකසයි. AI server එකකට upload කරන්නේ නැහැ.</p>
+    </section>
+
+    <section class="panel" id="scenesPanel">
+      <div class="section-head"><div><div class="step">STEP 02</div><h2>Scene සැලසුම</h2></div><span class="section-icon">🎞️</span></div>
+      <div id="emptyScenes" class="empty-state">ඔබේ කතාව ඇතුළත් කර <b>Scene හදන්න</b> ඔබන්න.</div>
+      <div id="sceneList" class="scene-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><div><div class="step">STEP 03</div><h2>සිංහල Voice</h2></div><span class="section-icon">🎙️</span></div>
+      <p class="body-copy">ඔබගේ iPhone/browser එකේ ඇති Sinhala voice එකක් තිබේ නම් එය භාවිතා කර narration කියවයි. Voice එකේ ගුණාත්මකභාවය device එක අනුව වෙනස් වේ.</p>
+      <div class="voice-controls">
+        <label for="voiceSelect">Voice</label>
+        <select id="voiceSelect"><option value="">Browser default voice</option></select>
+        <div class="two-buttons">
+          <button id="speakBtn" class="btn primary">▶ Narration අහන්න</button>
+          <button id="stopBtn" class="btn ghost">■ නවත්වන්න</button>
+        </div>
+      </div>
+      <div id="voiceStatus" class="status">Voice සූදානම්.</div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><div><div class="step">STEP 04</div><h2>ඔබේ Video Clips</h2></div><span class="section-icon">📽️</span></div>
+      <p class="body-copy">AI video tool එකකින් හදපු clips මෙතැනට එකතු කරන්න. එක් scene එකකට video එකක් තෝරන්න.</p>
+      <div id="clipList" class="clip-list"><div class="empty-state">මුලින් Scene හදන්න.</div></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head"><div><div class="step">STEP 05</div><h2>Project එක Save කරන්න</h2></div><span class="section-icon">⬇️</span></div>
+      <p class="body-copy">Scene text සහ video prompt ඇතුළත් project file එකක් download කරගන්න. පසුව නැවත import කරන්නත් පුළුවන්.</p>
+      <div class="two-buttons">
+        <button id="downloadProjectBtn" class="btn primary">↓ Project JSON</button>
+        <button id="importProjectBtn" class="btn ghost">↑ Project Import</button>
+        <input id="projectFile" type="file" accept=".json,application/json" hidden>
+      </div>
+      <div id="saveStatus" class="status"></div>
+    </section>
+
+
+    <section class="panel" id="exportPanel">
+      <div class="section-head"><div><div class="step">STEP 06</div><h2>අවසාන චිත්‍රපටය Export කරන්න</h2></div><span class="section-icon">🎬</span></div>
+      <p class="body-copy">සෑම Scene එකකටම video clip එකක් දාන්න. සම්පූර්ණ සිංහල narration audio file එකත් තෝරන්න. ඉන්පසු clips එකට එකතු කර MP4 එකක් හදන්න.</p>
+      <label for="narrationFile">සිංහල Narration Audio (MP3 / M4A / WAV)</label>
+      <input id="narrationFile" type="file" accept="audio/*">
+      <div class="hint">iPhone එකේ Voice Memos හෝ වෙනත් Sinhala voice app එකකින් හදාගත් narration file එක මෙතැනට දෙන්න. Browser එකේ text-to-speech හඬ MP4 එකට සෘජුව capture කරන්න බැරි නිසා audio file එකක් අවශ්‍යයි.</div>
+      <div class="two-buttons">
+        <button id="exportMp4Btn" class="btn primary">⬇ MP4 Film Download</button>
+      </div>
+      <div id="exportStatus" class="status" aria-live="polite">MP4 export සඳහා සූදානම්.</div>
+      <div class="hint">iPhone Safari එකේ MP4 recording support තිබුණොත් MP4 ලෙස download වේ. නැත්නම් browser එක support නොකරන බව දන්වයි. දිගු / විශාල clips සඳහා iPhone memory සීමාවක් තිබිය හැක.</div>
+    </section>
+
+    <section class="notice">
+      <b>වැදගත්</b>
+      <p>මෙම version එකේ browser-supported MP4 export පහසුකම ඇත. AI දර්ශන ස්වයංක්‍රීයව generate කරන්නේ නැහැ; ඔබ තෝරන clips සහ narration audio එකතු කරයි. MP4 export සඳහා iPhone Safari හි MediaRecorder MP4 support අවශ්‍යයි.</p>
+    </section>
+  </main>
+
+  <footer>SHAakya AI STUDIO · FREE EDITION <span>Made for your stories ✦</span></footer>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
+    }
+  </script>
+</body>
+</html>
